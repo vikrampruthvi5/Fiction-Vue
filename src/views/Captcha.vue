@@ -82,7 +82,6 @@
       },
       enter(e){
         if((this.x+this.y).toString()===e.target.value){
-          console.log("tui")
           this.isHidden = true;
          this.$router.push('/home');
         }

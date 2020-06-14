@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    
-    <v-content>
+    <v-content class="red">
      <router-view />
     </v-content>
   </v-app>
@@ -11,9 +10,7 @@
 
 export default {
   name: "App",
-
   components: {
-    
   },
 
   data: () => ({
@@ -22,8 +19,14 @@ export default {
 };
 </script>
 
+
 <style>
-html{
-  overflow-y: hidden;
-}
+
+html ::-webkit-scrollbar { width: 0 !important }  
+
+html { overflow: -moz-scrollbars-none; }
+
+html { -ms-overflow-style: none; }
+
+
 </style>

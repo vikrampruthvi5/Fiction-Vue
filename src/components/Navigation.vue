@@ -1,14 +1,9 @@
 <template>
+  <nav class="nav">
     <v-toolbar dense dark>
-      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-
-      <v-toolbar-title>
-          <span class="grey--text">SIMFIC 2.0</span>
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
+      <v-toolbar-title class="orange--text  font-weight-bold">SIMFIC 2.0</v-toolbar-title>
     </v-toolbar>
+  </nav>
 </template>
 
 
@@ -18,6 +13,10 @@
     }
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+  /* .nav{
+    position: fixed;
+    width: 100%;
+    
+  } */
 </style>
