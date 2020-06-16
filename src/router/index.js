@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Captcha from "../views/Captcha.vue";
-import Home from "../views/Home.vue";
+import Captcha from "@/views/Captcha.vue";
+import Home from "@/views/Home.vue";
+import Results from "@/views/Results.vue";
 
 
 Vue.use(VueRouter);
@@ -16,6 +17,11 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home
+  },
+  {
+    path: "/results",
+    name: "Results",
+    component: Results
   }
 ];
 

@@ -2,8 +2,8 @@
   <div class="home">
     <Navigation class="nav nav-extended"></Navigation>
     <v-container fluid>
-    <v-layout fill-height row class="">
-      <v-flex xs12 md6 order-xs1>
+    <v-layout fill-height row>
+      <v-flex xs12 md6 order-xs1 class="hidden-sm-and-down">
         <v-card light tile flat color="transparent">
           <h3 class="orange--text pl-3 pt-5">Most searched books</h3>
             <LeftPane />
@@ -11,7 +11,7 @@
       </v-flex>
       <v-flex xs12 md6 >
         <v-card light tile flat color="transparent">
-            <RightPane />
+            <RightPane></RightPane>
         </v-card>
       </v-flex>
     </v-layout>
@@ -21,7 +21,7 @@
 
 <script>
 // Dependencies import
-import axios from "axios";
+// import axios from "axios";
 // @ is an alias to /src
 import Navigation from '@/components/Navigation.vue';
 import LeftPane from '@/components/LeftPane.vue';
@@ -32,21 +32,14 @@ export default {
   components: {
     LeftPane,
     RightPane,
-    Navigation
+    Navigation,
   },
   data() {
     return {
-        response: null
+        response: null,
     }
   },
   created() {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then(response=>
-        (this.response = response.data))
-  },
-  beforeUpdate() {
-    console.log(this.response)
   },
 };
 </script>
@@ -54,11 +47,9 @@ export default {
 <style scoped>
   .home{
     background-color: rgb(248, 237, 223);
-    background-image: url("../assets/images/bg2.jpg");
+    background-image: url("../assets/images/bg2_compressed.jpg");
     background-size: cover;
     height: 100%;
   }
-
-
 </style>
 

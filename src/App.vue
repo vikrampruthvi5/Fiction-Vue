@@ -7,15 +7,13 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
   components: {
   },
-
-  data: () => ({
-    //
-  })
+  created() {
+    
+  },
 };
 </script>
 
@@ -28,5 +26,8 @@ html { overflow: -moz-scrollbars-none; }
 
 html { -ms-overflow-style: none; }
 
+html, body {
+   scrollbar-width: none;
+}
 
 </style>
