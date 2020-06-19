@@ -20,11 +20,13 @@
                     id="authorcb"
                     label="Select by Author"
                     clearable
+                    @change="AuthorChange"
+                    hide-selected
                 ></v-combobox>
                 <v-combobox
                     v-model="selecttitle"
                     :items="title"
-                    id="bookscb"
+                    id="titlecb"
                     label="Select a Book"
                     clearable
                 ></v-combobox>
@@ -32,6 +34,33 @@
                     <v-radio label="English" value="english" class="orange--text" @change="langChange('english')"></v-radio>
                     <v-radio label="German" value="german" class="orange--text" @change="langChange('germany')"></v-radio>
                 </v-radio-group>
+                <v-btn light color="grey" @click="fetchResults()">Search</v-btn>
+                <!-- <a
+                    class="ma-auto text-center ml-10"
+                    color="transparent"
+                    @click="expand = !expand"
+                >
+                    <v-icon left class="orange--text">settings</v-icon>
+                </a>
+                <v-expand-transition>
+                    <v-card
+                        v-show="expand"
+                        height="150"
+                        width="400"
+                        class="mx-auto pa-2 orange grey my-5"
+                    >
+                    <v-combobox
+                    v-model="selectauthor"
+                    :items="author"
+                    id="authorcb"
+                    label="Select by Author"
+                    clearable
+                    @change="AuthorChange"
+                    hide-selected
+                ></v-combobox>
+                    </v-card>
+                </v-expand-transition> -->
+
             </v-form>
         </v-card>
     </div>
@@ -42,6 +71,7 @@
     export default {
         data() {
             return {
+                expand: false,
                 selectgenre: '',
                 selectauthor: '',
                 selecttitle: '',
@@ -54,6 +84,12 @@
             }
         },
         methods: {
+            fetchResults(){
+                if(this.selecttitle!=''){
+                    console.log(this.selecttitle)
+                    
+                }
+            },
             updateDropDowns(){
                 this.keys = []
                 this.genre = []
@@ -69,24 +105,42 @@
             },
             langChange(radioLanguage){
                 if(radioLanguage==='english'){
-                    console.log('english')
+                    this.books = this.$store.getters.englishBooks
+                    this.updateDropDowns()
                 }
                 else{
-                    console.log('germany')
+                    this.books = this.$store.getters.germanBooks
+                    this.updateDropDowns()
                 }
             },
             GenreChange(){
-                console.log(this.selectgenre)
-                this.keys = []
                 this.keys = []
                 this.author = []
                 this.title = []
                 try{
                     this.selectgenre.length
                     for (let [key, value] of Object.entries(this.books)) {
-                        this.keys.push(key)
-                        this.author.push(value.author)
-                        this.title.push(value.title)
+                        if(value.genre===this.selectgenre){
+                            this.keys.push(key)
+                            this.author.push(value.author)
+                            this.title.push(value.title)
+                        }
+                    }
+                }
+                catch{
+                    this.updateDropDowns()
+                }
+            },
+            AuthorChange(){
+                this.keys = []
+                this.title = []
+                try{
+                    this.selectauthor.length
+                    for (let [key, value] of Object.entries(this.books)) {
+                        if(value.author===this.selectauthor){
+                            this.keys.push(key)
+                            this.title.push(value.title)
+                        }
                     }
                 }
                 catch{
@@ -94,10 +148,14 @@
                 }
             },
         },
+        // beforeUpdate() {
+        //     console.log('Updating')
+        //     // this.updateDropDowns();
+        // },
         created() {
-            this.books = this.$store.state.allbooks
+            this.books = this.$store.getters.englishBooks
             this.updateDropDowns();
-        }, 
+        },
     }
 </script>
 

@@ -3,21 +3,36 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import books from "@/assets/Data/milestone3.json"
+import books from "@/assets/Data/extracted_info.json"
 
 export default new Vuex.Store({
   state: {
-    allbooks:books,
-    books_german: null,
-    books_english: null
+    allbooks:books["books"],
   },
-  mutations: {
-    getEnglishBooks(){
-      for (let [key, value] of Object.entries(this.books)) {
-        console.log(key + " - " + value['language'])
-      }
-    }
-  },
+  mutations: {},
   actions: {},
   modules: {},
+  getters: {
+    germanBooks: state => {
+      return state.allbooks.filter(book => {
+        if(book.language==="de"){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+    },
+    englishBooks: state => {
+      return state.allbooks.filter(book => {
+        if(book.language==="en"){
+          return true;
+        }
+        else{
+          return false;
+        }
+      })
+    }
+  },
+  
 });
