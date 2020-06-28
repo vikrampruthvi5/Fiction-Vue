@@ -35,32 +35,6 @@
                     <v-radio label="German" value="german" class="orange--text" @change="langChange('germany')"></v-radio>
                 </v-radio-group>
                 <v-btn light color="grey" @click="fetchResults()">Search</v-btn>
-                <!-- <a
-                    class="ma-auto text-center ml-10"
-                    color="transparent"
-                    @click="expand = !expand"
-                >
-                    <v-icon left class="orange--text">settings</v-icon>
-                </a>
-                <v-expand-transition>
-                    <v-card
-                        v-show="expand"
-                        height="150"
-                        width="400"
-                        class="mx-auto pa-2 orange grey my-5"
-                    >
-                    <v-combobox
-                    v-model="selectauthor"
-                    :items="author"
-                    id="authorcb"
-                    label="Select by Author"
-                    clearable
-                    @change="AuthorChange"
-                    hide-selected
-                ></v-combobox>
-                    </v-card>
-                </v-expand-transition> -->
-
             </v-form>
         </v-card>
     </div>
@@ -80,14 +54,20 @@
                 title: [],
                 keys: [],
                 radios: 'english',
-                books: null
+                books: null,
+                dumm1 : null
             }
         },
         methods: {
             fetchResults(){
                 if(this.selecttitle!=''){
-                    console.log(this.selecttitle)
-                    
+                    for (let [key, value] of Object.entries(this.books)) {
+                        if(value.title === this.selecttitle){
+                            this.dumm1=key
+                            this.$store.commit('selectedSearchBook', value.id)
+                            this.$router.push('/results')
+                        }
+                    }
                 }
             },
             updateDropDowns(){
@@ -98,7 +78,7 @@
                 this.title = []
                 for (let [key, value] of Object.entries(this.books)) {
                     this.keys.push(key)
-                    this.genre.push(value.genre)
+                    this.genre.push(value.genre.trim())
                     this.author.push(value.author)
                     this.title.push(value.title)
                 }
@@ -148,10 +128,7 @@
                 }
             },
         },
-        // beforeUpdate() {
-        //     console.log('Updating')
-        //     // this.updateDropDowns();
-        // },
+
         created() {
             this.books = this.$store.getters.englishBooks
             this.updateDropDowns();

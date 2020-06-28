@@ -4,12 +4,19 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import books from "@/assets/Data/extracted_info.json"
+import results from "@/assets/Data/results.json"
 
 export default new Vuex.Store({
   state: {
     allbooks:books["books"],
+    SelectedBook : "",
+    results : results
   },
-  mutations: {},
+  mutations: {
+    selectedSearchBook(state, id){
+      state.SelectedBook = id
+    }
+  },
   actions: {},
   modules: {},
   getters: {
@@ -32,6 +39,12 @@ export default new Vuex.Store({
           return false;
         }
       })
+    },
+    getTodoById: (state) => (id) => {
+      return state.results.find(result => result.id === id)
+    },
+    getTodoByIdBook: (state) => (id) => {
+      return state.allbooks.find(book => book.id === id)
     }
   },
   
