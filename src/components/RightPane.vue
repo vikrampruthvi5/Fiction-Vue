@@ -34,7 +34,8 @@
                     <v-radio label="English" value="english" class="orange--text" @change="langChange('english')"></v-radio>
                     <v-radio label="German" value="german" class="orange--text" @change="langChange('germany')"></v-radio>
                 </v-radio-group>
-                <v-btn light color="grey" @click="fetchResults()">Search</v-btn>
+                <v-btn light color="orange lighten-2" @click="fetchResults()">Search</v-btn>
+                <span class="pl-4 red--text" :hidden="errHidden">* Seleact a book to search</span>
             </v-form>
         </v-card>
     </div>
@@ -55,7 +56,8 @@
                 keys: [],
                 radios: 'english',
                 books: null,
-                dumm1 : null
+                dumm1 : null,
+                errHidden : true
             }
         },
         methods: {
@@ -65,9 +67,13 @@
                         if(value.title === this.selecttitle){
                             this.dumm1=key
                             this.$store.commit('selectedSearchBook', value.id)
+                            sessionStorage.setItem('searchId', parseInt(sessionStorage.getItem('searchId'))+1)
                             this.$router.push('/results')
                         }
                     }
+                }
+                else{
+                    this.errHidden=false
                 }
             },
             updateDropDowns(){

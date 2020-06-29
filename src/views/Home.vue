@@ -1,6 +1,18 @@
 <template>
   <div class="home">
     <Navigation class="nav nav-extended"></Navigation>
+    <!-- <v-btn
+            class="mt-5"
+              absolute
+              small
+              dark
+              top
+              right
+              color="orange"
+            >
+              Take tour
+            </v-btn> -->
+    <tour></tour>
     <v-container fluid>
     <v-layout fill-height row>
       <v-flex xs12 md6 order-xs1 class="hidden-sm-and-down">
@@ -26,6 +38,7 @@
 import Navigation from '@/components/Navigation.vue';
 import LeftPane from '@/components/LeftPane.vue';
 import RightPane from '@/components/RightPane.vue';
+import tour from '@/components/tour.vue';
 
 export default {
   name: "Home",
@@ -33,6 +46,7 @@ export default {
     LeftPane,
     RightPane,
     Navigation,
+    tour,
   },
   data() {
     return {
@@ -47,6 +61,7 @@ export default {
 <style scoped>
   .home{
     background-color: rgb(248, 237, 223);
+    /* background-image: url("../assets/images/bg2_aqua.jpg"); */
     background-image: url("../assets/images/bg2_compressed.jpg");
     background-size: cover;
     height: 100%;

@@ -1,10 +1,12 @@
 <template>
     <div class="Results">
         <Navigation></Navigation>
-        <FloatingButton />
+        
         <v-card dark class="ma-auto pa-2 text-center">
-            <p>Top features responsible for below recommendations are</p>
-            <v-chip light v-for="(item, index) in features" :key="index" class="mx-2 orange">{{ item }}</v-chip>
+            <!-- <p>Searched Book : {{sele}}</p> -->
+            <p>Features responsible for recommendation</p>
+            <v-chip light v-for="(item, index) in finFeat" :key="index" class="mx-2 orange">{{ item }}</v-chip>
+            <FloatingButton />
         </v-card>
         <v-container fluid grid-list-xs class="px-12">
         <v-layout row wrap>
@@ -15,14 +17,15 @@
                             <img :src="`${ book.image }`" height="100" alt="" class="text-center ma-auto justify-center align-center">
                         </v-flex>
                         <v-flex xs6 sm1 md1 lg3 order-sm2 light class="pa-2 pl-2 ma-auto justify-center text-center">
-                            <a><v-icon large class="green--text pd-3 pr-5">thumb_up</v-icon></a><br>
+                            <a @click="recordClick(index, book)"><v-icon large class="green--text pd-3 pr-5" >thumb_up</v-icon></a><br>
                             <a><v-icon large class="red--text">thumb_down</v-icon></a><br>
                         </v-flex>
                         <v-flex xs10 sm9 md8 class="pa-2 pl-6">
-                            <span hidden>test</span>
+                            <span hidden>{{ index }}</span>
                             <h3 class="px-2" >{{ book.title }}</h3>
+                            
                             <h5 class="px-2 grey--text font-italic">by {{ book.author }}</h5>
-                            <v-btn text small target="__blank__" :href="`${ book.readLink }`" class="blue--text">
+                            <v-btn text small target="__    blank__" :href="`${ book.readLink }`" class="blue--text">
                                 <v-icon text left small class="blue--text">menu_book</v-icon><span >Read now</span></v-btn>
                             <v-expansion-panels flat>
                                 <v-expansion-panel>
@@ -55,6 +58,8 @@
 /* eslint-disable */
 import Navigation from "@/components/Navigation.vue";
 import FloatingButton from '@/components/FloatingButton.vue';
+// import {simficref} from '@/firebase';
+import db from '@/components/firebase'
     
     export default {
         name : "Results",
@@ -64,18 +69,25 @@ import FloatingButton from '@/components/FloatingButton.vue';
         },
         data() {
             return {
+                test: [],
                 panel: [0, 1],
                 disabled: false,
                 readonly: false,
-                features: ['Writing style', 'Female oriented', 'Genre'],
                 headers: [
                     { text: 'Book Name', value: 'title' }
                 ],
                 finRes: [],
-                finFeat: []
+                finFeat: [],
+                sele : '',
             }
         },
         methods: {
+
+            recordClick(index, book){
+                let rank = index+1
+                let name = book.title
+                this.$store.commit('searchResultAdd', {rank: rank, name: name})
+            }, 
             fetchResults(){
                 let results = this.$store.state.SelectedBook
                 let intRFesults = this.$store.getters.getTodoById(results)
@@ -86,13 +98,65 @@ import FloatingButton from '@/components/FloatingButton.vue';
                 this.finRes = finRes
 
                 intRFesults['features'].forEach(element => {
-                    console.log(element)
-                });
+                    let current = element;
+                    current = current.replace("F", "");
+                    current = current.replace("GF", "");
+                    current = current.replace("G", "");
+                    let val = parseInt(current);
+
+                    if(val==1) {
+                        element = "Female oriented";
+                    }
+                    else if(val==2) {
+                        element = "Male oriented";
+                    }
+                    else if(val>0 && val<=5 || val>=9 && val<=14) {
+                        element = "Writing Style";
+                    }
+                    else if(val>=6 && val<=8) {
+                        element = "Sentence Complexity";
+                    }
+                    else if(val==15) {
+                        element = "Rural or Urban Setting";
+                    }
+                    else if(val>=16 && val<=18) {
+                        element = "Rural or Urban Setting";
+                    }
+                    else if(val==19) {
+                        element = "Ease of readability";
+                    }
+                    else if(val==20) {
+                        element = "Plot complexity";
+                    }
+                    else if(val==21) {
+                        element = "Lexical richness";
+                    }
+                    else if(val>=22 && val<=41) {
+                        element = "Lexical richness";
+                    }
+                    else if(val>=22 && val<=41) {
+                        element = "Lexical richness";
+                    }
+                    else if(val==42) {
+                        element = "Dialog interaction";
+                    }
+                    else if(val==43) {
+                        element = "Main character";
+                    }
+                    else if(val>=44 && val<=46) {
+                        element = "Emotions";
+                    }
+
+                    this.finFeat.push(element)
+                });			
+
+                this.finFeat = new Set(this.finFeat)
                 
             }
         },
         created() {
             this.fetchResults()
+            this.sele = this.$store.state.SelectedBook
         },
     }
 </script>

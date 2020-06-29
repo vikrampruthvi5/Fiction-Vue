@@ -62,12 +62,22 @@
     </v-card>
             </v-col>
           </v-row>
-          
     </v-container>
   </div>
 </template>
 
 <script>
+  
+  // Check session ID now
+  let sessSet = sessionStorage.getItem('SessionId')
+  if(sessSet==null){
+    var currentDate = new Date();
+    let sessionId = currentDate.getMonth().toString()+currentDate.getDate().toString()+currentDate.getSeconds().toString()+currentDate.getMilliseconds().toString()
+    sessionStorage.setItem('SessionId', sessionId)
+    sessionStorage.setItem('searchId', 0)
+  }
+  
+
   export default {
     data() {
       return {
@@ -78,7 +88,7 @@
     },
     methods: {
       refresh(){
-
+        
       },
       enter(e){
         if((this.x+this.y).toString()===e.target.value){
