@@ -2,7 +2,7 @@
     <div light class="pa-3 justify-center align-center ma-auto">
         <v-card class="justify-center align-center ma-auto pane" dark flat color="transparent">
             <v-form class="px-5 panell">
-                <h1 class="orange--text">Welcome to SIMFIC 2.0</h1>
+                <h1 class="orange--text">Welcome to SIMFIC 2.0 <span><v-chip class="pink">Horizon</v-chip></span></h1>
                 <v-combobox
                     v-model="selectgenre"
                     :items="genre"

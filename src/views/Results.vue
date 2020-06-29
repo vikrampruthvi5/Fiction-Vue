@@ -4,9 +4,9 @@
         
         <v-card dark class="ma-auto pa-2 text-center">
             <!-- <p>Searched Book : {{sele}}</p> -->
-            <p>Our book recommendations for "{{ this.selectedBook }}"</p>
-            <p>Feature(s) responsible for recommendations :
-            <v-chip light v-for="(item, index) in finFeat" :key="index" class="mx-2 orange">{{ item }}</v-chip></p>
+            <p>Our book recommendations for "{{ this.selectedBook }}" book</p>
+            <!-- <p>Feature(s) responsible for recommendations :
+            <v-chip light v-for="(item, index) in finFeat" :key="index" class="mx-2 orange">{{ item }}</v-chip></p> -->
             <FloatingButton />
         </v-card>
         <v-container fluid grid-list-xs class="px-12">
