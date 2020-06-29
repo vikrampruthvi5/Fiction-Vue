@@ -167,7 +167,7 @@ import db from '@/components/firebase'
 
 <style scoped>
 .Results{
-    background-image: url("../assets/images/bg2_compressed.jpg");
+    background-image: url("../assets/images/bg2_air.jpg");
     background-size: cover;
     height: 100%;
 }

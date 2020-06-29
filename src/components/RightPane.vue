@@ -1,5 +1,5 @@
 <template>
-    <div dark class="pa-3 justify-center align-center ma-auto">
+    <div light class="pa-3 justify-center align-center ma-auto">
         <v-card class="justify-center align-center ma-auto pane" dark flat color="transparent">
             <v-form class="px-5 panell">
                 <h1 class="orange--text">Welcome to SIMFIC 2.0</h1>

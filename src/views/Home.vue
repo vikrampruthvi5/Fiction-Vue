@@ -62,7 +62,7 @@ export default {
   .home{
     background-color: rgb(248, 237, 223);
     /* background-image: url("../assets/images/bg2_aqua.jpg"); */
-    background-image: url("../assets/images/bg2_compressed.jpg");
+    background-image: url("../assets/images/bg2_air.jpg");
     background-size: cover;
     height: 100%;
   }
