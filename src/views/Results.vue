@@ -64,6 +64,9 @@ import db from '@/components/firebase'
     
     export default {
         name : "Results",
+        computed: {
+
+        },
         components: {
             Navigation,
             FloatingButton

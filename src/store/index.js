@@ -8,6 +8,7 @@ import results from "@/assets/Data/results.json"
 
 export default new Vuex.Store({
   state: {
+    selectedBookLang: '',
     resultsStore: [],
     allbooks:books["books"],
     SelectedBook : "",
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    setBook(state, lang){
+      state.selectedBookLang = lang
+    },
     selectedSearchBook(state, id){
       state.SelectedBook = id
     },

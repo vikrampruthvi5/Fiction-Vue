@@ -1,10 +1,10 @@
 export default {
-    apiKey: "AIzaSyCrMKdxayzPiGlBgCUjQQ8VvFBj8qycTKQ",
-    authDomain: "simfic-ovgu.firebaseapp.com",
-    databaseURL: "https://simfic-ovgu.firebaseio.com",
-    projectId: "simfic-ovgu",
-    storageBucket: "simfic-ovgu.appspot.com",
-    messagingSenderId: "1007426657050",
-    appId: "1:1007426657050:web:c79ece7c5c2d418a3a6aa3",
-    measurementId: "G-FEF6YR1ZGL"
+    apiKey: "AIzaSyAv-nBctIycwzFmVtjRqmlKp4XKG7aWPUc",
+    authDomain: "simfic-horizon.firebaseapp.com",
+    databaseURL: "https://simfic-horizon.firebaseio.com",
+    projectId: "simfic-horizon",
+    storageBucket: "simfic-horizon.appspot.com",
+    messagingSenderId: "360688946564",
+    appId: "1:360688946564:web:73aab80d5d98df6fc761d1",
+    measurementId: "G-EE2ZVB8M7C"
   }
