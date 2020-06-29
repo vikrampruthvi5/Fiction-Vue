@@ -38,15 +38,11 @@ import car3 from '@/assets/images/carousels/car3.png';
           'indigo',
           'indigo',
           'indigo',
-          'red lighten-1',
-          'deep-purple accent-4',
         ],
         slides: [
           car1,
           car2,
           car3,
-          'Fourth',
-          'Fifth',
         ],
       }
     },

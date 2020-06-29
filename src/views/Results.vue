@@ -4,8 +4,9 @@
         
         <v-card dark class="ma-auto pa-2 text-center">
             <!-- <p>Searched Book : {{sele}}</p> -->
-            <p>Features responsible for recommendation</p>
-            <v-chip light v-for="(item, index) in finFeat" :key="index" class="mx-2 orange">{{ item }}</v-chip>
+            <p>Our book recommendations for "{{ this.selectedBook }}"</p>
+            <p>Feature(s) responsible for recommendations :
+            <v-chip light v-for="(item, index) in finFeat" :key="index" class="mx-2 orange">{{ item }}</v-chip></p>
             <FloatingButton />
         </v-card>
         <v-container fluid grid-list-xs class="px-12">
@@ -79,6 +80,7 @@ import db from '@/components/firebase'
                 finRes: [],
                 finFeat: [],
                 sele : '',
+                selectedBook : ''
             }
         },
         methods: {
@@ -91,6 +93,7 @@ import db from '@/components/firebase'
             fetchResults(){
                 let results = this.$store.state.SelectedBook
                 let intRFesults = this.$store.getters.getTodoById(results)
+                this.selectedBook = this.$store.getters.getTodoByIdBook(results).title
                 let finRes = new Array()
                 intRFesults['books'].forEach(element => {
                     finRes.push(this.$store.getters.getTodoByIdBook(element))

@@ -85,7 +85,7 @@
                 for (let [key, value] of Object.entries(this.books)) {
                     this.keys.push(key)
                     this.genre.push(value.genre.trim())
-                    this.author.push(value.author)
+                    this.author.push(value.author.trim())
                     this.title.push(value.title)
                 }
             },
