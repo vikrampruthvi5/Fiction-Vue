@@ -1,23 +1,11 @@
 <template>
   <div class="home">
     <Navigation class="nav nav-extended"></Navigation>
-    <!-- <v-btn
-            class="mt-5"
-              absolute
-              small
-              dark
-              top
-              right
-              color="orange"
-            >
-              Take tour
-            </v-btn> -->
-    <tour></tour>
     <v-container fluid>
     <v-layout fill-height row>
       <v-flex xs12 md6 order-xs1 class="hidden-sm-and-down">
         <v-card light tile flat color="transparent">
-          <h3 class="orange--text pl-3 pt-5">Most searched books</h3>
+          <h3 class="orange--text pl-3 pt-5">Quick searches</h3>
             <LeftPane />
         </v-card>
       </v-flex>
@@ -38,7 +26,7 @@
 import Navigation from '@/components/Navigation.vue';
 import LeftPane from '@/components/LeftPane.vue';
 import RightPane from '@/components/RightPane.vue';
-import tour from '@/components/tour.vue';
+// import tour from '@/components/tour.vue';
 
 export default {
   name: "Home",
@@ -46,7 +34,7 @@ export default {
     LeftPane,
     RightPane,
     Navigation,
-    tour,
+    // tour,
   },
   data() {
     return {

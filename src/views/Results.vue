@@ -7,19 +7,20 @@
             <p>Our book recommendations for "{{ this.selectedBook }}"</p>
             <p>Feature(s) responsible for recommendations :
             <v-chip light v-for="(item, index) in finFeat" :key="index" class="mx-2 orange">{{ item }}</v-chip></p>
-            <FloatingButton />
+            
         </v-card>
+        <FloatingButton />
         <v-container fluid grid-list-xs class="px-12">
         <v-layout row wrap>
             <v-flex flat xs12 md8 lg8 class="grey--text ma-auto pa-2">
                 <v-card flat light v-for="(book, index) in finRes" :key="index">
                     <v-layout row wrap flat class="mb-1">
-                        <v-flex xs6 sm1 md1 class="pa-2 justify-center align-center ma-auto ">
+                        <v-flex xs6 sm1 md1 class="pa-2 justify-center align-center">
                             <img :src="`${ book.image }`" height="100" alt="" class="text-center ma-auto justify-center align-center">
                         </v-flex>
                         <v-flex xs6 sm1 md1 lg3 order-sm2 light class="pa-2 pl-2 ma-auto justify-center text-center">
-                            <a @click="recordClick(index, book)"><v-icon large class="green--text pd-3 pr-5" >thumb_up</v-icon></a><br>
-                            <a><v-icon large class="red--text">thumb_down</v-icon></a><br>
+                            <a @click="test1('tu'+index, index, book)"><v-icon large color="green lighten-4" :class="`pd-3 pr-5 tu${index} like`" :id="`tu${index}`">thumb_up</v-icon></a><br>
+                            <a @click="test1('td'+index, index, book)"><v-icon large color="red lighten-4" :class="`pd-3 pr-5 td${index} dislike`" :id="`td${index}`">thumb_down</v-icon></a><br>
                         </v-flex>
                         <v-flex xs10 sm9 md8 class="pa-2 pl-6">
                             <span hidden>{{ index }}</span>
@@ -48,10 +49,11 @@
                     :items-per-page="5"
                 ></v-data-table>
             </v-flex>
+            
         </v-layout>
         
        </v-container>
-        
+       
     </div>
 </template>
 
@@ -59,7 +61,6 @@
 /* eslint-disable */
 import Navigation from "@/components/Navigation.vue";
 import FloatingButton from '@/components/FloatingButton.vue';
-// import {simficref} from '@/firebase';
 import db from '@/components/firebase'
     
     export default {
@@ -84,12 +85,55 @@ import db from '@/components/firebase'
             }
         },
         methods: {
+            postToDB(rank, book){
+                let searchId = sessionStorage.getItem('searchId')
+                let sessionId = sessionStorage.getItem('SessionId')
+                let searchedBook = this.$store.getters.getTodoByIdBook(this.$store.state.SelectedBook)
+                let SearchBookName = searchedBook.title
+                let resultBookRank = rank
+                let resultBookName = book.title
+                let today = new Date()
+                let now = today.getUTCFullYear()+''+today.getUTCMonth()+''+today.getUTCDay()+''+today.getHours()+''+today.getMilliseconds()
+                
+                // ADDING TO DATABASE
+                db.collection('simfic-db').add({
+                    Id: '123456',
+                    sessionId: sessionId,
+                    searchId: searchId,
+                    searchBookId: this.$store.state.SelectedBook,
+                    SearchBookName : SearchBookName,
+                    resultBookRank : resultBookRank,
+                    resultBookName : resultBookName,
+                    timeStamp : now
+                }).then(docRef => {
+                    console.log(docRef)
+                })
+                .catch(error => console.log('Database error : ' + error))
 
-            recordClick(index, book){
-                let rank = index+1
-                let name = book.title
-                this.$store.commit('searchResultAdd', {rank: rank, name: name})
-            }, 
+            },
+            test1(index, rank, book){
+                let x = document.getElementById(index)
+                let cList = x.classList
+                let id = cList[8].substring(2, 3)
+                let liked = cList[9]
+                let col = cList[5].split('lighten-')[1]
+                
+                if (liked=='like' && col==4){
+                    let tu = document.getElementById('tu'+id)
+                    let td = document.getElementById('td'+id)
+                    tu.className = 'v-icon notranslate material-icons theme--light green--text text--lighten-0 pd-3 pr-5 tu'+ id +' like'
+                    td.className = 'v-icon notranslate material-icons theme--light red--text text--lighten-4 pd-3 pr-5 tu'+ id +' dislike'
+                    this.postToDB(rank, book)
+                }
+                else if(liked=='dislike' && col==4){
+                    let tu = document.getElementById('tu'+id)
+                    let td = document.getElementById('td'+id)
+                    tu.className = 'v-icon notranslate material-icons theme--light green--text text--lighten-4 pd-3 pr-5 tu'+ id +' like'
+                    td.className = 'v-icon notranslate material-icons theme--light red--text text--lighten-0 pd-3 pr-5 tu'+ id +' dislike'
+                    this.postToDB(rank, book)
+                }
+
+            },
             fetchResults(){
                 let results = this.$store.state.SelectedBook
                 let intRFesults = this.$store.getters.getTodoById(results)

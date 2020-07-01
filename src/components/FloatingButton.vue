@@ -7,7 +7,7 @@
               small
               dark
               fab
-              top
+              bottom
               right
               open-on-hover
               color="orange"  
@@ -19,7 +19,6 @@
 
 <script>
 // import Results from '@/views/Results.vue';
-import db from '@/components/firebase'
     export default {
         data() {
             return {
@@ -28,24 +27,7 @@ import db from '@/components/firebase'
         },
         methods: {
             hitTheSpot(){
-                console.log('clicked')
-                let searchId = sessionStorage.getItem('searchId')
-                let SessionId = sessionStorage.getItem('SessionId')
-                console.log(searchId, SessionId, this.$store.state.resultsStore)
-                
-                // ADDING TO DATABASE
-                db.collection('simfic-db').add({
-                    SessionId: SessionId,
-                    searchId: searchId,
-                    searchBook: this.$store.state.SelectedBook,
-                    userBehvr: this.$store.state.resultsStore
-                }).then(docRef => {
-                    this.$router.push('/home')
-                    console.log(docRef)
-                })
-                .catch(error => console.log('Database error : ' + error))
 
-                this.$store.commit('EmptySearchResultAdd')
             }
         },
     }

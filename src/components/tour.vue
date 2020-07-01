@@ -1,19 +1,13 @@
 <template>
-  <v-row justify="center">
+  <div class="pa-0">
     <v-dialog v-model="dialog" scrollable max-width="900px">
+
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-            absolute
-            small
-            light
-            top
-            right
-            color="orange"
-            v-bind="attrs"
-            v-on="on"
-        >
-          Take tour
+        <v-btn small light color="orange" class="ml-1" v-bind="attrs" v-on="on">
+          <v-icon small left>extension</v-icon>
+          <span class="py-auto"><b>Take tour</b></span>
         </v-btn>
+
       </template>
       <v-card>
         <v-card-title>SIMFIC quick tour</v-card-title>
@@ -28,12 +22,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-row>
+  </div>
 </template>
 
 <script>
 import carousel from '@/components/carousel.vue';
   export default {
+      name: "tour",
       components: {
         carousel,
       },
