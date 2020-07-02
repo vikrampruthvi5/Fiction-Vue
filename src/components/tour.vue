@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" scrollable max-width="900px">
 
       <template v-slot:activator="{ on, attrs }">
-        <v-btn small light color="orange" class="ml-1" v-bind="attrs" v-on="on">
+        <v-btn small light color="primary" class="ml-1" v-bind="attrs" v-on="on">
           <v-icon small left>extension</v-icon>
           <span class="py-auto"><b>Take tour</b></span>
         </v-btn>

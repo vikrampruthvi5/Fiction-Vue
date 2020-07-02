@@ -3,8 +3,7 @@
         <v-layout row wrap class="justify-center align-center text-center">
             <v-flex v-for="book in books" :key="book.bid" xs4 xl3 lg3 md4 class="justify-center align-center text-center pa-2" color="transparent">
                 <v-card @click="fetchResults(book.title)" min-height="250" max-height="250" flat color="transparent">
-                    <img :src="`${book.image}`" alt="" height="180" class="pt-4"><br>
-                    <span class="px-2 white--text">{{ book.title}}</span><br>
+                    <img :src="`${book.image}`" @hover="imgHover(book.image, book.title, book.author)" alt="" height="250" class="pt-4 test"><br>
                 </v-card>
         </v-flex>   
         </v-layout>
@@ -25,6 +24,9 @@
             }
         },
         methods: {
+            imgHover(){
+
+            },
             fetchResults(title){
                 if(this.selecttitle!=''){
                     for (let [key, value] of Object.entries(this.books)) {
@@ -56,5 +58,8 @@
 .pane{
     width: 70%;
     overflow-y: scroll;
+}
+.test{
+    border-radius: 10px;
 }
 </style>

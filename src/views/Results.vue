@@ -10,10 +10,11 @@
             <v-tooltip v-for="item in finFeat" :key="item.id" bottom color="black white--text" max-width="250">
                 <template v-slot:activator="{ on, attrs }">
                     <v-chip light 
-                    class="orange" 
+                    small
+                    class="primary px-3 mx-3" 
                     v-bind="attrs"
                     @mouseenter= "getData(item)"
-                    v-on="on">{{item}}</v-chip>
+                    v-on="on"><v-icon small class="white--text" left>mdi-information</v-icon>  {{item}}</v-chip>
                 </template>
                 <span>{{locExp}}</span>
             </v-tooltip>
@@ -21,10 +22,10 @@
             
         </v-card>
         <FloatingButton />
-        <v-container fluid grid-list-xs class="px-12">
+        <v-container fluid grid-list-xs class="px-12 mx-xl-10">
         <v-layout row wrap>
             <v-flex flat xs12 md8 lg8 class="grey--text ma-auto pa-2">
-                <v-card flat light v-for="(book, index) in finRes" :key="index">
+                <v-card flat light v-for="(book, index) in finRes" :key="index" style="border-left-color: red">
                     <v-layout row wrap flat class="mb-1">
                         <v-flex xs6 sm1 md1 class="pa-2 justify-center align-center">
                             <img :src="`${ book.image }`" height="100" alt="" class="text-center ma-auto justify-center align-center">
@@ -41,13 +42,33 @@
                             <span class="px-2 grey--text font-italic">based on</span>
 
                                 <!-- TOOL TIP FOR EXPLANATION -->
-                                <v-tooltip right color="black" max-width="250">
+                                <v-tooltip right class="pa-5" color="black" max-width="500">
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-chip small light class="primary" v-bind="attrs"
                                         @mouseenter="getData(finLoc[index])"
                                         v-on="on"> <v-icon small left class="white--text">mdi-information</v-icon>{{finLoc[index]}}</v-chip>
                                     </template>
-                                    <span>{{locExp}}</span>
+                                    <span>
+                                        {{locExp}} <br>
+                                        <table class="pa-4">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <img :src="`${ book.image }`" height="200" alt="" class="red text-center ma-auto justify-center align-center">
+                                                    </td>
+                                                    <td>
+                                                        <img :src="`${ arrow }`" height="200" alt="" class="text-center ma-auto justify-center align-center">
+                                                    </td>
+                                                    <td>
+                                                        <img :src="`${ sBookimg }`" height="200" alt="" class="text-center ma-auto justify-center align-center">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        
+                                        
+                                        
+                                        </span>
                                 </v-tooltip>
 
                                 <br>
@@ -87,6 +108,7 @@ import Navigation from "@/components/Navigation.vue";
 import FloatingButton from '@/components/FloatingButton.vue';
 import db from '@/components/firebase'
 import explanations from '@/assets/Data/explanations.json';
+import arrow from '@/assets/images/1885.png';
     
     export default {
         name : "Results",
@@ -109,18 +131,22 @@ import explanations from '@/assets/Data/explanations.json';
                 finLoc: [],
                 sele : '',
                 selectedBook : '',
-                locExp : ''
+                locExp : '',
+                arrow : arrow, 
+                sBookimg : ''
             }
         },
         methods: {
             getData(id){
+                let searchedBook = this.$store.getters.getTodoByIdBook(this.$store.state.SelectedBook)
+                this.sBookimg = searchedBook['image']
                 explanations.forEach(element => {
                     if (element['id'].toLowerCase() === id.toLowerCase()){
                         this.locExp = element['value']
                     }
                 }); 
             },
-            postToDB(rank, book){
+            postToDB(rank, book, like){
                 let searchId = sessionStorage.getItem('searchId')
                 let sessionId = sessionStorage.getItem('SessionId')
                 let searchedBook = this.$store.getters.getTodoByIdBook(this.$store.state.SelectedBook)
@@ -132,14 +158,14 @@ import explanations from '@/assets/Data/explanations.json';
                 
                 // ADDING TO DATABASE
                 db.collection('simfic-db').add({
-                    Id: '123456',
                     sessionId: sessionId,
                     searchId: searchId,
                     searchBookId: this.$store.state.SelectedBook,
                     SearchBookName : SearchBookName,
                     resultBookRank : resultBookRank,
                     resultBookName : resultBookName,
-                    timeStamp : now
+                    timeStamp : now,
+                    liked: like
                 }).then(docRef => {
                     console.log(docRef)
                 })
@@ -158,14 +184,14 @@ import explanations from '@/assets/Data/explanations.json';
                     let td = document.getElementById('td'+id)
                     tu.className = 'v-icon notranslate material-icons theme--light green--text text--lighten-0 pd-3 pr-5 tu'+ id +' like'
                     td.className = 'v-icon notranslate material-icons theme--light red--text text--lighten-4 pd-3 pr-5 tu'+ id +' dislike'
-                    this.postToDB(rank, book)
+                    this.postToDB(rank, book, liked)
                 }
                 else if(liked=='dislike' && col==4){
                     let tu = document.getElementById('tu'+id)
                     let td = document.getElementById('td'+id)
                     tu.className = 'v-icon notranslate material-icons theme--light green--text text--lighten-4 pd-3 pr-5 tu'+ id +' like'
                     td.className = 'v-icon notranslate material-icons theme--light red--text text--lighten-0 pd-3 pr-5 tu'+ id +' dislike'
-                    this.postToDB(rank, book)
+                    this.postToDB(rank, book, liked)
                 }
 
             },
