@@ -2,7 +2,7 @@
     <div dark class="pa-3 justify-center align-center ma-auto">
         <v-card class="justify-center align-center ma-auto pane" dark flat color="transparent">
             <v-form class="px-5 panell">
-                <h1 class="orange--text">Welcome to SIMFIC 2.0 <span><v-chip small class="orange black--text">Sky</v-chip></span></h1>
+                <h1 class="orange--text lighten-5">Welcome to SIMFIC 2.0</h1>
                 <v-combobox
                     v-model="selectgenre"
                     :items="genre"
@@ -31,10 +31,10 @@
                     clearable
                 ></v-combobox>
                 <v-radio-group v-model="radios" row>
-                    <v-radio label="English" value="english" class="orange--text" @change="langChange('english')"></v-radio>
-                    <v-radio label="German" value="german" class="orange--text" @change="langChange('germany')"></v-radio>
+                    <v-radio label="English" value="english" class="black--text" @change="langChange('english')"></v-radio>
+                    <v-radio label="German" value="german" class="black--text" @change="langChange('germany')"></v-radio>
                 </v-radio-group>
-                <v-btn light color="orange lighten-2" @click="fetchResults()">Search</v-btn>
+                <v-btn dark color="gray darken-2" @click="fetchResults()">Search</v-btn>
                 <span class="pl-4 red--text" :hidden="errHidden">* Seleact a book to search</span>
             </v-form>
         </v-card>

@@ -5,7 +5,7 @@
     <v-layout fill-height row>
       <v-flex xs12 md6 order-xs1 class="hidden-sm-and-down">
         <v-card light tile flat color="transparent">
-          <h3 class="orange--text pl-3 pt-5">Quick searches</h3>
+          <h2 class="orange--text pl-3 pt-5">Quick searches</h2>
             <LeftPane />
         </v-card>
       </v-flex>
@@ -47,10 +47,12 @@ export default {
 </script>
 
 <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
   .home{
-    background-color: rgb(248, 237, 223);
-    /* background-image: url("../assets/images/bg2_aqua.jpg"); */
-    background-image: url("../assets/images/bg2_compressed.jpg");
+    background-color: #eceff0;
+    /* background-image: url("https://wallpaperplay.com/walls/full/7/d/4/91361.jpg"); */
+    /* background-image: url("../assets/images/bg.svg"); */
+    background-image: url("../assets/images/bg.jpg");
     background-size: cover;
     height: 100%;
   }

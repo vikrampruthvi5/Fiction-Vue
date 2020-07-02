@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 import books from "@/assets/Data/extracted_info.json"
 import results from "@/assets/Data/results.json"
+import explanations from '@/assets/Data/explanations.json';
 
 export default new Vuex.Store({
   state: {
@@ -12,6 +13,8 @@ export default new Vuex.Store({
     allbooks:books["books"],
     SelectedBook : "",
     results : results,
+    locEx : "",
+    explanations: explanations,
     books: [
       {"id": "108", "title": "The Return of Sherlock Holmes", "genre": "Detective and Mystery", "language": "en", "author": "Arthur Conan Doyle", "image": "http://books.google.com/books/content?id=xgnTteuZ694C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api", "readLink": "http://www.gutenberg.org/files/108/108-h/108-h.htm", "desc": "In 1891, the great detective, Sherlock Holmes, disappeared in Switzerland while working on a dangerous case. Everyone thought he was dead, but three years later he returned to England. Holmes and his friend, Dr Watson, had many more adventures together. Three of his most interesting cases feature in this book."},
       {"id": "730", "title": "Oliver Twist", "genre": "Literary", "language": "en", "author": "Charles Dickens", "image": "http://books.google.com/books/content?id=1bMXAAAAYAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api", "readLink": "http://www.gutenberg.org/files/730/730-h/730-h.htm", "desc": "At the heart of Charles Dickens's second novel, first published in 1838, is a story as much about crime and poverty as it is about justice and charity. Orphaned at birth, Oliver Twist grows up under the loveless, relentless watch of a workhouse. He runs away with hopes for a better life in London, only to become--at the hands of the unforgettable Artful Dodger--a guileless pawn in a gang of pickpockets and robbers working for Fagin, one of Dickens's most controversial villains. Full of ingenious plot twists, at turns thrilling, tragic, tender, and sharp-eyed, The Adventures of Oliver Twist is among Dickens's most enduring classics. This is a free digital copy of a book that has been carefully scanned by Google as part of a project to make the world's books discoverable online. To make this print edition available as an ebook, we have extracted the text using Optical Character Recognition (OCR) technology and submitted it to a review process to ensure its accuracy and legibility across different screen sizes and devices. Google is proud to partner with libraries to make this book available to readers everywhere."},
@@ -24,6 +27,9 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    setlocEx(state, id){
+      state.locEx = id
+    },
     selectedSearchBook(state, id){
       state.SelectedBook = id
     },
@@ -59,6 +65,17 @@ export default new Vuex.Store({
     },
     getTodoById: (state) => (id) => {
       return state.results.find(result => result.id === id)
+    },
+    getexplanationByFeature: (state) => () => {
+      explanations.forEach(element => {
+          if (element['id'] === state.locEx){
+            return element['value']
+          }
+          else{
+            return 'Unable to find'
+          }
+      }); 
+      
     },
     getTodoByIdBook: (state) => (id) => {
       return state.allbooks.find(book => book.id === id)

@@ -1,6 +1,6 @@
 <template>
-    <v-toolbar dark dense>
-      <v-toolbar-title class="orange--text font-weight-bold" to="/home">SIMFIC 2.0</v-toolbar-title>
+    <v-toolbar dark dense flat height="80">
+      <v-toolbar-title class="orange--text pa-5 text-center" to="/home" style="font-family: 'Yellowtail', cursive; font-size: 40px">SIMFIC 2.0<span class="pl-5 orange--text">Sky</span></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn small light color="orange" class="ml-1" to='/home'><v-icon small left>house</v-icon><span class="py-auto"><b>Home</b></span></v-btn>
       <tour></tour>
@@ -11,7 +11,8 @@
 
 
 <script>
-import navi from '@/assets/images/nav1.png';
+
+import navi from '@/assets/images/abg.png';
 import tour from '@/components/tour.vue';
     export default {
         name: "Navigation",
@@ -30,5 +31,6 @@ import tour from '@/components/tour.vue';
 </script>
 
 <style scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 
 </style>

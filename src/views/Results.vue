@@ -2,11 +2,22 @@
     <div class="Results">
         <Navigation></Navigation>
         
-        <v-card dark class="ma-auto pa-2 text-center">
+        <v-card dark class="ma-auto pa-2 text-center" color="transparent" flat>
             <!-- <p>Searched Book : {{sele}}</p> -->
-            <p>Our book recommendations for "{{ this.selectedBook }}"</p>
-            <p>Feature(s) responsible for recommendations :
-            <v-chip light v-for="(item, index) in finFeat" :key="index" class="mx-2 orange">{{ item }}</v-chip></p>
+            <p>Our book recommendations for the book <span class="font-italic">"{{ this.selectedBook }}"</span></p>
+            <p>Factor(s) responsible for recommendations :                
+
+            <v-tooltip v-for="item in finFeat" :key="item.id" bottom color="black white--text" max-width="250">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-chip light 
+                    class="orange" 
+                    v-bind="attrs"
+                    @mouseenter= "getData(item)"
+                    v-on="on">{{item}}</v-chip>
+                </template>
+                <span>{{locExp}}</span>
+            </v-tooltip>
+            </p>
             
         </v-card>
         <FloatingButton />
@@ -19,19 +30,32 @@
                             <img :src="`${ book.image }`" height="100" alt="" class="text-center ma-auto justify-center align-center">
                         </v-flex>
                         <v-flex xs6 sm1 md1 lg3 order-sm2 light class="pa-2 pl-2 ma-auto justify-center text-center">
-                            <a @click="test1('tu'+index, index, book)"><v-icon large color="green lighten-4" :class="`pd-3 pr-5 tu${index} like`" :id="`tu${index}`">thumb_up</v-icon></a><br>
-                            <a @click="test1('td'+index, index, book)"><v-icon large color="red lighten-4" :class="`pd-3 pr-5 td${index} dislike`" :id="`td${index}`">thumb_down</v-icon></a><br>
+                            <a @click="test1('tu'+index, index, book)"><v-icon large color="green lighten-4" :class="`pd-3 pr-5 tu${index} like`" :id="`tu${index}`">thumb_up</v-icon><span class="pa-2" left>Like</span></a><br>
+                            <a @click="test1('td'+index, index, book)"><v-icon large color="red lighten-4" :class="`pd-3 pr-5 td${index} dislike`" :id="`td${index}`">thumb_down</v-icon><span>Dislike</span></a><br>
                         </v-flex>
                         <v-flex xs10 sm9 md8 class="pa-2 pl-6">
                             <span hidden>{{ index }}</span>
                             <h3 class="px-2" >{{ book.title }}</h3>
                             
                             <h5 class="px-2 grey--text font-italic">by {{ book.author }}</h5>
-                            <v-btn text small target="__    blank__" :href="`${ book.readLink }`" class="blue--text">
+                            <span class="px-2 grey--text font-italic">based on</span>
+
+                                <!-- TOOL TIP FOR EXPLANATION -->
+                                <v-tooltip right color="black" max-width="250">
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-chip small light class="primary" v-bind="attrs"
+                                        @mouseenter="getData(finLoc[index])"
+                                        v-on="on"> <v-icon small left class="white--text">mdi-information</v-icon>{{finLoc[index]}}</v-chip>
+                                    </template>
+                                    <span>{{locExp}}</span>
+                                </v-tooltip>
+
+                                <br>
+                            <v-btn text small target="__blank__" :href="`${ book.readLink }`" class="blue--text">
                                 <v-icon text left small class="blue--text">menu_book</v-icon><span >Read now</span></v-btn>
                             <v-expansion-panels flat>
                                 <v-expansion-panel>
-                                    <v-expansion-panel-header class="px-2" ripple>Description</v-expansion-panel-header>
+                                    <v-expansion-panel-header disable-icon-rotate hide-actions class="px-2 primary--text" ripple><span><v-icon small class="primary--text">description</v-icon>Description</span></v-expansion-panel-header>
                                     <v-expansion-panel-content class="px-2">
                                         {{ book.desc }}
                                     </v-expansion-panel-content>
@@ -62,6 +86,7 @@
 import Navigation from "@/components/Navigation.vue";
 import FloatingButton from '@/components/FloatingButton.vue';
 import db from '@/components/firebase'
+import explanations from '@/assets/Data/explanations.json';
     
     export default {
         name : "Results",
@@ -75,16 +100,26 @@ import db from '@/components/firebase'
                 panel: [0, 1],
                 disabled: false,
                 readonly: false,
+                explanations: explanations,
                 headers: [
                     { text: 'Book Name', value: 'title' }
                 ],
                 finRes: [],
                 finFeat: [],
+                finLoc: [],
                 sele : '',
-                selectedBook : ''
+                selectedBook : '',
+                locExp : ''
             }
         },
         methods: {
+            getData(id){
+                explanations.forEach(element => {
+                    if (element['id'].toLowerCase() === id.toLowerCase()){
+                        this.locExp = element['value']
+                    }
+                }); 
+            },
             postToDB(rank, book){
                 let searchId = sessionStorage.getItem('searchId')
                 let sessionId = sessionStorage.getItem('SessionId')
@@ -157,7 +192,7 @@ import db from '@/components/firebase'
                     else if(val==2) {
                         element = "Male oriented";
                     }
-                    else if(val>0 && val<=5 || val>=9 && val<=14) {
+                    else if(val>=0 && val<=5 || val>=9 && val<=14) {
                         element = "Writing Style";
                     }
                     else if(val>=6 && val<=8) {
@@ -167,7 +202,7 @@ import db from '@/components/firebase'
                         element = "Rural or Urban Setting";
                     }
                     else if(val>=16 && val<=18) {
-                        element = "Rural or Urban Setting";
+                        element = "Sentiment";
                     }
                     else if(val==19) {
                         element = "Ease of readability";
@@ -182,7 +217,7 @@ import db from '@/components/firebase'
                         element = "Lexical richness";
                     }
                     else if(val>=22 && val<=41) {
-                        element = "Lexical richness";
+                        element = "Genre";
                     }
                     else if(val==42) {
                         element = "Dialog interaction";
@@ -198,6 +233,59 @@ import db from '@/components/firebase'
                 });			
 
                 this.finFeat = new Set(this.finFeat)
+
+                intRFesults['loc'].forEach(element => {
+                    let current = element;
+                    current = current.replace("F", "");
+                    current = current.replace("GF", "");
+                    current = current.replace("G", "");
+                    let val = parseInt(current);
+
+                    if(val==1) {
+                        element = "Female oriented";
+                    }
+                    else if(val==2) {
+                        element = "Male oriented";
+                    }
+                    else if(val>=0 && val<=5 || val>=9 && val<=14) {
+                        element = "Writing Style";
+                    }
+                    else if(val>=6 && val<=8) {
+                        element = "Sentence Complexity";
+                    }
+                    else if(val==15) {
+                        element = "Rural or Urban Setting";
+                    }
+                    else if(val>=16 && val<=18) {
+                        element = "Sentiment";
+                    }
+                    else if(val==19) {
+                        element = "Ease of readability";
+                    }
+                    else if(val==20) {
+                        element = "Plot complexity";
+                    }
+                    else if(val==21) {
+                        element = "Lexical richness";
+                    }
+                    else if(val>=22 && val<=41) {
+                        element = "Lexical richness";
+                    }
+                    else if(val>=22 && val<=41) {
+                        element = "Genre";
+                    }
+                    else if(val==42) {
+                        element = "Dialog interaction";
+                    }
+                    else if(val==43) {
+                        element = "Main character";
+                    }
+                    else if(val>=44 && val<=46) {
+                        element = "Emotions";
+                    }
+
+                    this.finLoc.push(element)
+                });
                 
             }
         },
@@ -211,7 +299,7 @@ import db from '@/components/firebase'
 
 <style scoped>
 .Results{
-    background-image: url("../assets/images/bg2_compressed.jpg");
+    background-image: url("../assets/images/bg.jpg");
     background-size: cover;
     height: 100%;
 }
