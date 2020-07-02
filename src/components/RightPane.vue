@@ -1,9 +1,11 @@
 <template>
     <div dark class="pa-3 justify-center align-center ma-auto">
         <v-card class="justify-center align-center ma-auto pane" dark flat color="transparent">
+            <div min-height="100"></div>
             <v-form class="px-5 panell">
                 <h1 class="orange--text lighten-5">Welcome to SIMFIC 2.0</h1>
                 <v-combobox
+                
                     v-model="selectgenre"
                     :items="genre"
                     id="genrecb"
@@ -15,6 +17,7 @@
                     hide-selected
                 ></v-combobox>
                 <v-combobox
+                
                     v-model="selectauthor"
                     :items="author"
                     id="authorcb"
@@ -24,6 +27,7 @@
                     hide-selected
                 ></v-combobox>
                 <v-combobox
+                
                     v-model="selecttitle"
                     :items="title"
                     id="titlecb"
@@ -31,7 +35,7 @@
                     clearable
                 ></v-combobox>
                 <v-radio-group v-model="radios" row>
-                    <v-radio label="English" value="english" class="black--text" @change="langChange('english')"></v-radio>
+                    <v-radio  label="English" value="english" class="black--text" @change="langChange('english')"></v-radio>
                     <v-radio label="German" value="german" class="black--text" @change="langChange('germany')"></v-radio>
                 </v-radio-group>
                 <v-btn dark color="gray darken-2" @click="fetchResults()">Search</v-btn>

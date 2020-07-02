@@ -299,7 +299,8 @@ import explanations from '@/assets/Data/explanations.json';
 
 <style scoped>
 .Results{
-    background-image: url("../assets/images/bg.jpg");
+    background-color: white;
+    background-image: url("../assets/images/fin_bg.jpg");
     background-size: cover;
     height: 100%;
 }

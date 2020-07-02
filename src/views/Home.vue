@@ -50,9 +50,9 @@ export default {
   @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
   .home{
     background-color: #eceff0;
-    /* background-image: url("https://wallpaperplay.com/walls/full/7/d/4/91361.jpg"); */
-    /* background-image: url("../assets/images/bg.svg"); */
-    background-image: url("../assets/images/bg.jpg");
+    /* background-image: url("https://material-crypto.vuetifyjs.com/img/blob-top-min.3a5c5dfb.png"); */
+    background-image: url("../assets/images/fin_bg.jpg");
+    /* background-image: url("../assets/images/bg.jpg"); */
     background-size: cover;
     height: 100%;
   }
