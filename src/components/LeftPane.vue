@@ -1,15 +1,14 @@
 <template>
     <div dark class="pa-3 justify-center align-center ma-auto">
         <v-layout row wrap class="justify-center align-center text-center">
-            <v-flex v-for="book in books" :key="book.bid" xs4 xl3 lg3 md4 class="justify-center align-center text-center pa-2" color="transparent">
-                <v-card @click="fetchResults(book.title)" min-height="250" max-height="250" flat color="transparent" @mouseenter="imgHover(book.id)" @mouseleave="imgHoverx(book.id)">
+            <v-flex v-for="book in books" :key="book.bid" xs4 xl3 lg3 md3 class="justify-center align-center text-center pa-2" color="transparent">
+                <v-card class="mb-5" @click="fetchResults(book.title)" min-height="200" max-height="200" flat color="transparent" @mouseenter="imgHover(book.id)" @mouseleave="imgHoverx(book.id)">
                     
                     <div class="container">
-                        <!-- <img :src="`${book.image}`" @hover="imgHover(book.image, book.title, book.author)" alt="" height="250" class="pt-4 test"><br> -->
-                        <img :src="`${book.image}`"  alt="Snow" :class="`test i${book.id}`" :id="`i${book.id}`" height="250">
-                        <div class="top-left" min-height="250" max-height="250" style="display: none " :id="`x${book.id}`" >
+                        <img :src="`${book.image}`"  alt="Snow" :class="`test i${book.id}`" :id="`i${book.id}`" height="200">
+                        <div class="top-left" min-height="200" max-height="200" style="display: none " :id="`x${book.id}`" >
                             <img :src="`${book.image}`" alt="Snow" height="150">
-                            <h3>{{book.title}}</h3>
+                            <h4>{{book.title}}</h4>
                             <h5 class="font-italic">by {{book.author}}</h5>
                         </div>
                 </div>
