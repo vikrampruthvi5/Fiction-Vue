@@ -3,6 +3,8 @@
     <v-content class="red">
      <router-view />
     </v-content>
+
+    
   </v-app>
 </template>
 
@@ -14,6 +16,15 @@ export default {
   created() {
     
   },
+  data() {
+    return {
+      
+    };
+  },
+  methods: {
+    
+  },
+  
 };
 </script>
 

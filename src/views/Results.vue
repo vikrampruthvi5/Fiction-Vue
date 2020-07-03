@@ -1,6 +1,12 @@
 <template>
     <div class="Results">
         <Navigation></Navigation>
+
+        <v-fab-transition>
+            <v-btn color="primary darken-3" dark fab fixed bottom right v-show="showFab" @click="$vuetify.goTo('#app', {duration: 500, offset: 0})">
+                <v-icon>keyboard_arrow_up</v-icon>
+            </v-btn>
+        </v-fab-transition>
         
         <v-card dark class="ma-auto pa-2 text-center" color="transparent" flat>
             <!-- <p>Searched Book : {{sele}}</p> -->
@@ -131,10 +137,14 @@ import arrow from '@/assets/images/1885.png';
                 selectedBook : '',
                 locExp : '',
                 arrow : arrow, 
-                sBookimg : ''
+                sBookimg : '',
+                offsetTop: 0
             }
         },
         methods: {
+            onScroll() {
+                this.offsetTop = window.pageYOffset || document.documentElement.scrollTop;
+            },
             getData(id){
                 let searchedBook = this.$store.getters.getTodoByIdBook(this.$store.state.SelectedBook)
                 this.sBookimg = searchedBook['image']
@@ -311,6 +321,11 @@ import arrow from '@/assets/images/1885.png';
             this.fetchResults()
             this.sele = this.$store.state.SelectedBook
         },
+        computed: {
+        showFab() {
+            return this.offsetTop == 0;
+        }
+  }
     }
 </script>
 

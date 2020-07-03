@@ -38,12 +38,12 @@
                 let x = document.getElementById('i'+bookid)
                 let y = document.getElementById('x'+bookid)
                 x.style.display = 'none'
-                y.style.display = 'block'
+                y.style.display = ''
             },
             imgHoverx(bookid){
                 let x = document.getElementById('i'+bookid)
                 let y = document.getElementById('x'+bookid)
-                x.style.display = 'block'
+                x.style.display = ''
                 y.style.display = 'none'
             },
             fetchResults(title){
