@@ -65,9 +65,7 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        
-                                        
-                                        
+                                    
                                         </span>
                                 </v-tooltip>
 
@@ -240,9 +238,6 @@ import arrow from '@/assets/images/1885.png';
                         element = "Lexical richness";
                     }
                     else if(val>=22 && val<=41) {
-                        element = "Lexical richness";
-                    }
-                    else if(val>=22 && val<=41) {
                         element = "Genre";
                     }
                     else if(val==42) {
@@ -292,9 +287,6 @@ import arrow from '@/assets/images/1885.png';
                         element = "Plot complexity";
                     }
                     else if(val==21) {
-                        element = "Lexical richness";
-                    }
-                    else if(val>=22 && val<=41) {
                         element = "Lexical richness";
                     }
                     else if(val>=22 && val<=41) {

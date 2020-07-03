@@ -7,8 +7,8 @@
     {"id":"Plot Complexity", "value": "Plot Complexity of a book is defined as the number of characters present in the book. Usually, readers prefer books that are less complex."},
     {"id":"Rural or Urban Setting", "value": "The rural or urban setting is defined by the subject of the story. The amount of conversation and the number of people in the story are used to calculate this setting."},
     {"id":"Lexical Richness", "value": "Lexical Richness is defined by the quality of vocabulary used in the book and is used to compare two authors. "},
-    {"id":"Genre", "value":"UPDATE REQUIRED"},
-    {"id":"Main character presence", "value":"UPDATE REQUIRED"},
-    {"id":"Dialog interactions", "value":"UPDATE REQUIRED"},
+    {"id":"Genre", "value":"Genre of the book."},
+    {"id":"Main character presence", "value":"Main character presence is defined by the presence or absence of a main character in the book"},
+    {"id":"Dialog interactions", "value":"Dialog interactions are defined based on who is leading the conversation. We call it DIALOGUE if characters are talking and NARRATION if narrator is speaking"},
     {"id":"Emotions", "value": "It defines the flow of emotions for the start and end of the book."}
 ]
