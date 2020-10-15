@@ -39,7 +39,7 @@
                     <v-radio label="German" value="german" class="black--text" @change="langChange('germany')"></v-radio>
                 </v-radio-group>
                 <v-btn dark color="gray darken-2" @click="fetchResults()">Search</v-btn>
-                <span class="pl-4 red--text" :hidden="errHidden">* Seleact a book to search</span>
+                <span class="pl-4 red--text" :hidden="errHidden">* Select a book to search</span>
             </v-form>
         </v-card>
     </div>

@@ -1,5 +1,5 @@
 [
-    {"id":"Writing style", "value": "The writing style of an author can be defined as the way a writer writes. It is the technique that an individual author uses in his writing. It varies from author to author and depends upon one's syntax, word choice, punctuation, etc."},
+    {"id":"Author's Writing Style ", "value": "The writing style of an author can be defined as the way a writer writes. It is the technique that an individual author uses in his writing. It varies from author to author and depends upon one's syntax, word choice, punctuation, etc."},
     {"id":"Sentence complexity", "value": "The sentence complexity of the book is defined by its length of sentences by the author. Books with similar sentence complexity are preferred by the user"},
     {"id":"Female oriented or Male oriented", "value": "Female or Male orientation is defined by plots in the book having a female or male protagonist or a story revolving around female(s). Pronouns used by the author(s) in the story are used to calculate whether the book is female or male-oriented"},
     {"id":"Ease of readability", "value": "Ease of readability is defined by Reading-ease test gives an idea of the level of easiness in reading the text"},
@@ -7,7 +7,7 @@
     {"id":"Plot Complexity", "value": "Plot Complexity of a book is defined as the number of characters present in the book. Usually, readers prefer books that are less complex."},
     {"id":"Rural or Urban Setting", "value": "The rural or urban setting is defined by the subject of the story. The amount of conversation and the number of people in the story are used to calculate this setting."},
     {"id":"Lexical Richness", "value": "Lexical Richness is defined by the quality of vocabulary used in the book and is used to compare two authors. "},
-    {"id":"Genre", "value":"Genre of the book."},
+    {"id":"Content Based genre", "value":"Instead of making use of the genre determined by popular websites ,the genre of a book here is determined by the content of the book."},
     {"id":"Main character presence", "value":"Main character presence is defined by the presence or absence of a main character in the book"},
     {"id":"Dialog interactions", "value":"Dialog interactions are defined based on who is leading the conversation. We call it DIALOGUE if characters are talking and NARRATION if narrator is speaking"},
     {"id":"Emotions", "value": "It defines the flow of emotions for the start and end of the book."}

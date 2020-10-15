@@ -10,8 +10,9 @@
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
-    "firebase": "^7.15.5",
-    "google-spreadsheet": "^3.0.11",
+    "firebase": "^7.23.0",
+    "google-spreadsheet": "^3.0.13",
+    "material-design-icons-iconfont": "^6.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuefire": "^2.2.2",

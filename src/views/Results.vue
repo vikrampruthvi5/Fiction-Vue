@@ -11,7 +11,7 @@
         <v-card dark class="ma-auto pa-2 text-center" color="transparent" flat>
             <!-- <p>Searched Book : {{sele}}</p> -->
             <p>Our book recommendations for the book <span class="font-italic">"{{ this.selectedBook }}"</span></p>
-            <p>Factor(s) responsible for recommendations :                
+            <p>Factor(s) responsible for the retrieval of the list of books displayed below:                
 
             <v-tooltip v-for="item in finFeat" :key="item.id" bottom color="black white--text" max-width="250">
                 <template v-slot:activator="{ on, attrs }">
@@ -45,7 +45,10 @@
                             <h3 class="px-2" >{{ book.title }}</h3>
                             
                             <h5 class="px-2 grey--text font-italic">by {{ book.author }}</h5>
-                            <span class="px-2 grey--text font-italic">based on</span>
+                            <!-- <span class="px-2 grey--text">Query book and result book have similar</span> -->
+                            <span class="px-2 grey--text">{{ this.selectedBook }}</span>
+                            
+                            
 
                                 <!-- TOOL TIP FOR EXPLANATION -->
                                 <v-tooltip right class="pa-5" color="black" max-width="500">
