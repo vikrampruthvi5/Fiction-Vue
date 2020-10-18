@@ -9,7 +9,7 @@
         </v-fab-transition>
         
         <v-card dark class="ma-auto pa-2 text-center" color="transparent" flat>
-            <!-- <p>Searched Book : {{sele}}</p> -->
+            <!-- <p>Searched Book : {{sele}} {{ this.selectedBook }}</p> -->
             <p>Our book recommendations for the book <span class="font-italic">"{{ this.selectedBook }}"</span></p>
             <p>Factor(s) responsible for the retrieval of the list of books displayed below:                
 
@@ -44,10 +44,10 @@
                             <span hidden>{{ index }}</span>
                             <h3 class="px-2" >{{ book.title }}</h3>
                             
-                            <h5 class="px-2 grey--text font-italic">by {{ book.author }}</h5>
-                            <!-- <span class="px-2 grey--text">Query book and result book have similar</span> -->
-                            <span class="px-2 grey--text">{{ this.selectedBook }}</span>
-                            
+                            <h5 class="px-2 mx-1  grey--text font-italic">by {{ book.author }}</h5>
+                            <h5  class="px-2 mx-1 grey--text">
+                                <span v-text="searchBookName"></span>
+                                <span>and {{ book.title }} have similar </span>
                             
 
                                 <!-- TOOL TIP FOR EXPLANATION -->
@@ -55,7 +55,7 @@
                                     <template v-slot:activator="{ on, attrs }">
                                         <v-chip small light class="primary" v-bind="attrs"
                                         @mouseenter="getData(finLoc[index])"
-                                        v-on="on"> <v-icon small left class="white--text">mdi-information</v-icon>{{finLoc[index]}}</v-chip>
+                                        v-on="on"> {{finLoc[index]}}</v-chip>
                                     </template>
                                     <span>
                                         {{locExp}} <br>
@@ -79,6 +79,7 @@
                                 </v-tooltip>
 
                                 <br>
+                            </h5>
                             <v-btn text small target="__blank__" :href="`${ book.readLink }`" class="blue--text">
                                 <v-icon text left small class="blue--text">menu_book</v-icon><span >Read now</span></v-btn>
                             <v-expansion-panels flat>
@@ -124,6 +125,7 @@ import arrow from '@/assets/images/1885.png';
             FloatingButton
         },
         data() {
+            let searchBookName = ''
             return {
                 test: [],
                 panel: [0, 1],
@@ -138,6 +140,7 @@ import arrow from '@/assets/images/1885.png';
                 finLoc: [],
                 sele : '',
                 selectedBook : '',
+                searchBookName : '',
                 locExp : '',
                 arrow : arrow, 
                 sBookimg : '',
@@ -145,6 +148,10 @@ import arrow from '@/assets/images/1885.png';
             }
         },
         methods: {
+            searchBook_name(){
+                this.searchBookName = 'love is love...'
+                return this.searchBookName
+            },
             onScroll() {
                 this.offsetTop = window.pageYOffset || document.documentElement.scrollTop;
             },
@@ -210,6 +217,8 @@ import arrow from '@/assets/images/1885.png';
                 let results = this.$store.state.SelectedBook
                 let intRFesults = this.$store.getters.getTodoById(results)
                 this.selectedBook = this.$store.getters.getTodoByIdBook(results).title
+                this.searchBookName = this.selectedBook
+                console.log(this.searchBookName)
                 let finRes = new Array()
                 intRFesults['books'].forEach(element => {
                     finRes.push(this.$store.getters.getTodoByIdBook(element))
@@ -230,7 +239,7 @@ import arrow from '@/assets/images/1885.png';
                         element = "Male oriented";
                     }
                     else if(val>=0 && val<=5 || val>=9 && val<=14) {
-                        element = "Writing Style";
+                        element = "Author's Writing Style";
                     }
                     else if(val>=6 && val<=8) {
                         element = "Sentence Complexity";
@@ -251,7 +260,7 @@ import arrow from '@/assets/images/1885.png';
                         element = "Lexical richness";
                     }
                     else if(val>=22 && val<=41) {
-                        element = "Genre";
+                        element = "Content Based Genre";
                     }
                     else if(val==42) {
                         element = "Dialog interaction";
@@ -282,7 +291,7 @@ import arrow from '@/assets/images/1885.png';
                         element = "Male oriented";
                     }
                     else if(val>=0 && val<=5 || val>=9 && val<=14) {
-                        element = "Writing Style";
+                        element = "Author's Writing Style";
                     }
                     else if(val>=6 && val<=8) {
                         element = "Sentence Complexity";
@@ -303,7 +312,7 @@ import arrow from '@/assets/images/1885.png';
                         element = "Lexical richness";
                     }
                     else if(val>=22 && val<=41) {
-                        element = "Genre";
+                        element = "Content Based Genre";
                     }
                     else if(val==42) {
                         element = "Dialog interaction";
